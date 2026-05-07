@@ -17,10 +17,10 @@ class NetworkApiModule extends AppModule {
   void register(ModuleRegistry registry) {
     // internal
     registry.registerInstance<NetworkConfig>(config);
-    registry.registerSingleton<RestClient>(() => DioRestClient.new);
-    registry.registerSingleton<Interceptor>(() => DioLoggerInterceptor.new);
+    registry.registerSingleton<RestClient>(DioRestClient.new);
+    registry.registerSingleton<Interceptor>(DioLoggerInterceptor.new);
 
     // external
-    registry.registerSingleton<NetworkApi>(() => NetworkApi.new);
+    registry.registerSingleton<NetworkApi>(NetworkApi.new);
   }
 }

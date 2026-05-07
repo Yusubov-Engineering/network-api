@@ -1,10 +1,2 @@
-import 'package:dio/dio.dart';
-
-import 'src/core/rest_client.dart';
-
-class NetworkApi {
-  const NetworkApi({required this.client, required this.loggerInterceptor});
-
-  final RestClient client;
-  final Interceptor loggerInterceptor;
-}
+export 'src/network_api_module.dart';
+export 'src/network_config.dart';

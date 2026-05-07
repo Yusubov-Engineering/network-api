@@ -2,20 +2,24 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import 'core/response_body.dart';
-import 'core/rest_client_base.dart';
-import 'core/rest_exceptions.dart';
+import '../network_config.dart';
+import 'response_body.dart';
+import 'rest_client_base.dart';
+import 'rest_exceptions.dart';
 
 final class DioRestClient extends RestClientBase {
-  DioRestClient({required super.baseUrl, Dio? dio})
+  DioRestClient(NetworkConfig config, Interceptor loggerInterceptor, {Dio? dio})
     : _dio = (dio ?? Dio())
         ..options = BaseOptions(
-          baseUrl: baseUrl,
-          headers: {'contet-type': 'application/json; charset=utf-8'},
-        );
+          baseUrl: config.baseUrl,
+          headers: {'content-type': 'application/json; charset=utf-8'},
+        ),
+      super(baseUrl: config.baseUrl) {
+    // Attach the interceptor immediately!
+    _dio.interceptors.add(loggerInterceptor);
+  }
 
   final Dio _dio;
-
   Dio get dio => _dio;
 
   void add(Interceptor interceptor) {

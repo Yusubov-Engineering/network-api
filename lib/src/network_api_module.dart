@@ -14,13 +14,13 @@ class NetworkApiModule implements AppModule {
   final NetworkConfig config;
 
   @override
-  void register(ModularInjector injector) {
+  void register(ModularRegistrar register) {
     // internal
-    injector.instance<NetworkConfig>(config);
-    injector.singleton<RestClient>(DioRestClient.new);
-    injector.singleton<Interceptor>(DioLoggerInterceptor.new);
+    register.instance<NetworkConfig>(config);
+    register.singleton<RestClient>(DioRestClient.new);
+    register.singleton<Interceptor>(DioLoggerInterceptor.new);
 
     // external
-    injector.singleton<NetworkApi>(NetworkApi.new);
+    register.singleton<NetworkApi>(NetworkApi.new);
   }
 }

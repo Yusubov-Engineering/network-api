@@ -7,20 +7,20 @@ import 'core/dio_logger_interceptor.dart';
 import 'core/dio_rest_client.dart';
 import 'network_config.dart';
 
-class NetworkApiModule extends AppModule {
+class NetworkApiModule implements AppModule {
   // The app must provide this configuration
   NetworkApiModule({required this.config});
 
   final NetworkConfig config;
 
   @override
-  void register(ModuleRegistry registry) {
+  void register(ModularInjector injector) {
     // internal
-    registry.registerInstance<NetworkConfig>(config);
-    registry.registerSingleton<RestClient>(DioRestClient.new);
-    registry.registerSingleton<Interceptor>(DioLoggerInterceptor.new);
+    injector.instance<NetworkConfig>(config);
+    injector.singleton<RestClient>(DioRestClient.new);
+    injector.singleton<Interceptor>(DioLoggerInterceptor.new);
 
     // external
-    registry.registerSingleton<NetworkApi>(NetworkApi.new);
+    injector.singleton<NetworkApi>(NetworkApi.new);
   }
 }

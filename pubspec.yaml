@@ -16,6 +16,7 @@ dependencies:
   dependency_injection_api:
     git:
       url: https://github.com/Yusubov-Engineering/dependency-injection-api
+      ref: 2.0.1
 
 dev_dependencies:
   flutter_test:
